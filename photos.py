@@ -18,10 +18,13 @@ INPUT_RES = 1440
 FONT_SIZE = 20
 TEXT_COLOR = (0, 0, 0)
 
+def uniquote(stuff):
+    return quote(stuff.encode('utf-8'))
+
 def make_url(year, category, photographer, pid):
-    year = quote(year)
-    category = quote(category)
-    photographer = quote(photographer)
+    year = uniquote(year)
+    category = uniquote(category)
+    photographer = uniquote(photographer)
     pid = pid + 1
     return u"http://htt-phototeam.de/#&gid=%s/%s/%s&pid=%d" % (year, category, photographer, pid)
 
