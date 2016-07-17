@@ -44,6 +44,7 @@ def get_random_photo():
     category = pick_random_key(json['photos'][year][photographer])
 
     photos = json['photos'][year][photographer][category]
+    photos = sorted(photos, key = lambda photo: photo['thumb'])
     pid = random.randint(0, len(photos) - 1)
     photo_url = photos[pid]['images'][unicode(INPUT_RES)]['src']
 
