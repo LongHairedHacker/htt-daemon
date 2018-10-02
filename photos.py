@@ -12,6 +12,7 @@ from PIL import ImageDraw
 
 from StringIO import StringIO
 
+YEAR = "2017"
 GALLERY_URL = "http://htt-phototeam.de/gallery.json"
 
 INPUT_RES = 1440
@@ -36,7 +37,7 @@ def get_random_photo():
     resp = requests.get(GALLERY_URL)
     json = resp.json()
 
-    year = pick_random_key(json['photos'])
+    year = YEAR
     photographer = pick_random_key(json['photos'][year])
     category = pick_random_key(json['photos'][year][photographer])
 

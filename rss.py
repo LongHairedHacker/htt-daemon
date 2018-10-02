@@ -7,7 +7,7 @@ import feedparser
 from lxml import html
 
 URLS_LIST = 'urls.lst'
-RSS_URL = 'http://www.hoellenberg-trophy.de/index.php?format=feed&type=rss'
+RSS_URL = 'https://htt-spirkelbach.de/feed/'
 
 def load_old_urls():
     urls = []
@@ -35,11 +35,12 @@ def get_new_items():
     for item in sorted(rss.entries, key=lambda x: x.published_parsed):
         url = item.link
         if not (url in old_urls):
-            text = html.fromstring(item.description).text_content()
-            if len(text) > 1:
-                text = ' '.join(text.split())
-                new_items += [u'%s…\n%s' % (text[0:80], url)]
-                old_urls += [url]
+            if len(item.description) > 0:
+                text = html.fromstring(item.description).text_content()
+                if len(text) > 1:
+                    text = ' '.join(text.split())
+                    new_items += [u'%s…\n%s' % (text[0:80], url)]
+                    old_urls += [url]
 
     save_old_urls(old_urls)
 
